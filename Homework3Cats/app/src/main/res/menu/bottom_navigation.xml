@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_food"
+        android:icon="@drawable/ic_local_dining_black_24dp"
+        android:title="Foods"
+    />
+
+    <item
+        android:id="@+id/nav_shopcart"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="My Order"
+        />
+
+
+</menu>
