@@ -1,16 +1,16 @@
-package com.example.homework3cats.ui.notifications;
+package com.example.homework3cats.ui.favourites;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class FavouritesModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public FavouritesModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is home fragment");
     }
 
     public LiveData<String> getText() {
