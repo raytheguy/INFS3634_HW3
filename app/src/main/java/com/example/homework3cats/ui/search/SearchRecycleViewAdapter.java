@@ -1,23 +1,35 @@
 package com.example.homework3cats.ui.search;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.homework3cats.Cat;
+import com.example.homework3cats.DetailFragment;
 import com.example.homework3cats.R;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class SearchRecycleViewAdapter extends RecyclerView.Adapter<SearchRecycleViewAdapter.ViewHolder> {
 
     public Context mContext;
+    public List<Cat> arrayToPut;
 
-    public SearchRecycleViewAdapter(Context mContext) {
+    public SearchRecycleViewAdapter(Context mContext, List<Cat> arrayToPut) {
         this.mContext = mContext;
+        this.arrayToPut = arrayToPut;
     }
 
     @NonNull
@@ -32,14 +44,32 @@ public class SearchRecycleViewAdapter extends RecyclerView.Adapter<SearchRecycle
     //changes based on layout
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        holder.catTextView.setText(arrayToPut.get(position).getName());
 
+        //onClick Listener when the 'holder' or constraintLayout is clicked
+        holder.layoutMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View myView) {
 
+                //get the cat id to pass over
+                String catId = arrayToPut.get(position).getId();
+                DetailFragment myFragment = new DetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("catId", arrayToPut.get(position).getId());
+                bundle.putSerializable("catThings", arrayToPut.get(position));
+                myFragment.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity) mContext;
+                //check if it is the right container
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cont_main, myFragment).addToBackStack(null).commit();
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         //get the amount of article Ids that exists
-        return 1;
+        return arrayToPut.size();
     }
 
     //purpose: holds widgets in memory

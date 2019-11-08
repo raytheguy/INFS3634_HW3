@@ -6,13 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,15 +19,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.homework3cats.Cat;
-import com.example.homework3cats.CatResults;
 import com.example.homework3cats.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
     //create new arrayList to hold cat objects
-    public ArrayList<Cat> catToPut = new ArrayList<>();
+    public List<Cat> catToPut;
     //new layout manager
     RecyclerView.LayoutManager layoutManager;
     //String to receive the JSON
@@ -85,12 +82,20 @@ public class SearchFragment extends Fragment {
                 System.out.println("Your response has succeeded");
                 //place response to a String of Jsons
                 getBackFromApi = response;
-                System.out.println(getBackFromApi);
                 Gson gson = new Gson();
-                CatResults jsonCat = gson.fromJson(getBackFromApi, CatResults.class);
-//                catToPut = jsonCat.getCats();
-                System.out.println("The cat from position 1 is " );
+                Cat[] jsonCat = gson.fromJson(getBackFromApi, Cat[].class);
+//                Cat jsonCat = gson.fromJson(getBackFromApi, Cat.class);
+                //convert arrays to ArrayList
+                catToPut = Arrays.asList(jsonCat);
 
+                if (catToPut.size() == 0){
+                    //have snackbar intent to let the user know no results found
+                    Snackbar.make(getView(), "No Results Found!", Snackbar.LENGTH_LONG).show();
+                }
+
+                //pass the List to the RecyclerViewFragment
+                SearchRecycleViewAdapter adapterSearch = new SearchRecycleViewAdapter(getActivity(), catToPut);
+                recyclerView.setAdapter(adapterSearch);
             }
 
         };
@@ -99,6 +104,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("There was error" + error.toString());
+                //have snackbar intent to let the user know
+                Snackbar.make(getView(), "Connection Failed or No Animal Founds on Your Search!", Snackbar.LENGTH_LONG).show();
             }
     };
 

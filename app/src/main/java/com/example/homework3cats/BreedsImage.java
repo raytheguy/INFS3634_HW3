@@ -1,0 +1,34 @@
+package com.example.homework3cats;
+
+import java.util.ArrayList;
+
+public class BreedsImage {
+
+    private ArrayList<Cat> breeds;
+    private String id;
+    private String url;
+
+    public ArrayList<Cat> getBreeds() {
+        return breeds;
+    }
+
+    public void setBreeds(ArrayList<Cat> breeds) {
+        this.breeds = breeds;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+}

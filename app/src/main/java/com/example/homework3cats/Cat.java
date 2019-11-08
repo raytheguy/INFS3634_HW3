@@ -1,22 +1,35 @@
 package com.example.homework3cats;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 //model for cats
+@Entity
 public class Cat implements Serializable {
+
+    //array
+    public ArrayList<Cat> cats;
 
     //based upon assignment criteria and Json Model
     //only dog friend is an integer
-    String id;
-    String name;
-    String description;
-    String weight_imperial;
-    String temperament;
-    String origin;
-    String life_span;
-    String wikipedia_url;
+    private String id;
+    private String name;
+    private String description;
+    private String weight_imperial;
+    private String temperament;
+    private String origin;
+    private String life_span;
+    private String wikipedia_url;
     int dog_friendly;
+    @Ignore
+    @SerializedName("weight")
+    private Weight weight;
+    private String url;
 
     //no images here
 
@@ -96,5 +109,39 @@ public class Cat implements Serializable {
     public void setDog_friendly(int dog_friendly) {
         this.dog_friendly = dog_friendly;
     }
+
+    public ArrayList<Cat> getCats() {
+        return cats;
+    }
+
+    public void setCats(ArrayList<Cat> cats) {
+        this.cats = cats;
+    }
+
+    public Weight getWeight() {
+        return weight;
+    }
+
+    public class Weight implements Serializable {
+        private String imperial;
+        private String metric;
+
+        public String getImperial() {
+            return imperial;
+        }
+
+        public void setImperial(String imperial) {
+            this.imperial = imperial;
+        }
+
+        public String getMetric() {
+            return metric;
+        }
+
+        public void setMetric(String metric) {
+            this.metric = metric;
+        }
+    }
+
 
 }

@@ -16,7 +16,7 @@
         android:layout_marginEnd="64dp"
         android:text="Cat Breed Name"
         android:textAlignment="textStart"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
