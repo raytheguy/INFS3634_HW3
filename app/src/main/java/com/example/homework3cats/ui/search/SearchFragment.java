@@ -110,7 +110,14 @@ public class SearchFragment extends Fragment {
     };
 
         //API Url
-        String url = "https://api.thecatapi.com/v1/breeds/search?q="+userSearchText;
+        String url;
+        //if the user entered nothing, then use the search all url
+        if (userSearchText.equals("")) {
+            url = "https://api.thecatapi.com/v1/breeds?limit=5000";
+        }
+        else {
+            url = "https://api.thecatapi.com/v1/breeds/search?q=" + userSearchText;
+        }
         //Request Queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         //String Request
