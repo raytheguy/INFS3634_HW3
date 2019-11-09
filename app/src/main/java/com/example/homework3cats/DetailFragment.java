@@ -7,7 +7,9 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -37,6 +39,7 @@ public class DetailFragment extends Fragment {
     TextView catWikipedia;
     String catId;
     Cat catReceived;
+    Switch favouriteYNSwitch;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -60,16 +63,25 @@ public class DetailFragment extends Fragment {
         catLife = rootView.findViewById(R.id.catLifeTextView);
         catDog = rootView.findViewById(R.id.catDogTextView);
         catWikipedia = rootView.findViewById(R.id.catWikiLinkTextView);
+        favouriteYNSwitch = rootView.findViewById(R.id.favSwitch);
 
         //have intent to let marker know that you need to scroll down for more information
         View view2 = getActivity().findViewById(R.id.fragment_cont_main);
-        Snackbar.make(view2, "Scroll down for more information. Please wait for image to load", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(view2, "Scroll down for more information. Please wait for image to load", Snackbar.LENGTH_SHORT).show();
 
         //inflate the layout for this fragment
         //get the bundle of a cat's information
         Bundle bundle = getArguments();
+        catId = bundle.getString("catId");
         if (bundle != null && catReceived == null) {
-            catId = bundle.getString("catId");
+            //check if it is a favourite, if yes, have have the switch checked, else have it unchecked
+            if (Favourites.favIdArray.contains(catId)){
+                favouriteYNSwitch.setChecked(true);
+            }
+                else {
+                favouriteYNSwitch.setChecked(false);
+            }
+
             //do the Gson Conversion to get the images by calling method below
             getImage(catId, rootView);
             catReceived = (Cat) bundle.getSerializable("catThings");
@@ -97,6 +109,49 @@ public class DetailFragment extends Fragment {
                     startActivity(browser);
                 }
 
+            });
+
+            //onClick Listener for Favourites Switch
+            //adds/removes from favourites ArrayList
+            favouriteYNSwitch.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    //Is the switch is on?
+                    boolean on = ((Switch) v).isChecked();
+                    if(on)
+                    {
+                        //Do something when switch is on/checked
+                        //if statement to see if it is already in the arrayList
+                        if (Favourites.favIdArray.contains(catId)){
+                            //do nothing
+                        }
+                        else {
+                            //add the catId to the list
+                            Favourites.favIdArray.add(catId);
+                            Favourites.favCats.add(catReceived);
+                        }
+
+                        //if successful, display intent message
+                        Snackbar.make(v, "Added to favourites", Snackbar.LENGTH_SHORT).show();
+
+                    }
+                    else
+                    {
+                        //Do something when switch is off/unchecked
+                        //if statement to see if it is already in the z5161354 arraylist
+                        //if yes, remove it from the ArrayList
+                        if (Favourites.favIdArray.contains(catId)){
+                            Favourites.favIdArray.remove(catId);
+                            Favourites.favCats.remove(catReceived);
+                        }
+                        //if no, do nothing
+                        else{
+                            //do nothing
+                        }
+                        //if it was in favourites, and now removed, tell the user it is removed
+                        Snackbar.make(v, "Removed in favourites", Snackbar.LENGTH_SHORT).show();
+                    }
+                }
             });
 
         }

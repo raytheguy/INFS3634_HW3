@@ -59,7 +59,7 @@ public class SearchRecycleViewAdapter extends RecyclerView.Adapter<SearchRecycle
                 bundle.putSerializable("catThings", arrayToPut.get(position));
                 myFragment.setArguments(bundle);
                 AppCompatActivity activity = (AppCompatActivity) mContext;
-                //check if it is the right container
+                //check if it is the right container z5161354
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cont_main, myFragment).addToBackStack(null).commit();
 
             }
