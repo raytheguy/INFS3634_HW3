@@ -91,12 +91,12 @@ public class DetailFragment extends Fragment {
 
             //some don't have weight, so ignore it
             if (catReceived.getWeight() != null) {
-                catWeight.setText(catReceived.getWeight().getMetric() + " kg");
+                catWeight.setText("Cat Weight: " + catReceived.getWeight().getMetric() + " kg");
             }
-            catTemp.setText(catReceived.getTemperament());
-            catOrigin.setText(catReceived.getOrigin());
-            catLife.setText("Cat Life " + catReceived.getLife_span() + " years");
-            catDog.setText("Dog Friendly Level " + String.valueOf(catReceived.getDog_friendly()) + "/5");
+            catTemp.setText("Temperament: " + catReceived.getTemperament());
+            catOrigin.setText("Origin: " + catReceived.getOrigin());
+            catLife.setText("Cat Life: " + catReceived.getLife_span() + " years");
+            catDog.setText("Dog Friendly Level: " + String.valueOf(catReceived.getDog_friendly()) + "/5");
             catWikipedia.setText(catReceived.getWikipedia_url());
             catWikipedia.setMovementMethod(LinkMovementMethod.getInstance());
             catWikipedia.setOnClickListener(new View.OnClickListener() {
