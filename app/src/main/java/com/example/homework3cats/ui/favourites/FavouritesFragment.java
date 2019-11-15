@@ -34,12 +34,8 @@ import java.util.List;
 public class FavouritesFragment extends Fragment {
     //RecyclerView to be used by all classes
     public RecyclerView recyclerViewFav;
-    //create new arrayList to hold cat objects
-    public List<Cat> catToPut;
     //new layout manager
     RecyclerView.LayoutManager layoutManagerFav;
-    //String to receive the JSON
-    String getBackFromApi;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

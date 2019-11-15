@@ -65,7 +65,7 @@ public class FavouritesRecycleViewAdapter extends RecyclerView.Adapter<Favourite
                 bundle.putSerializable("catThings", arrayToPut.get(position));
                 myFragment.setArguments(bundle);
                 AppCompatActivity activity = (AppCompatActivity) mContext;
-                //check if it is the right container
+                //check if it is the right container z5161354
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cont_main, myFragment).addToBackStack(null).commit();
 
             }

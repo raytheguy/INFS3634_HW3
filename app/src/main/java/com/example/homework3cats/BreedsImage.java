@@ -2,6 +2,7 @@ package com.example.homework3cats;
 
 import java.util.ArrayList;
 
+//this class is to get back images of cats from API
 public class BreedsImage {
 
     private ArrayList<Cat> breeds;

@@ -1,24 +1,18 @@
 package com.example.homework3cats.ui.search;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.homework3cats.Cat;
 import com.example.homework3cats.DetailFragment;
 import com.example.homework3cats.R;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
